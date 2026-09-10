@@ -5,6 +5,7 @@
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Version>0.1.0</Version>
     <AssemblyName>AventurerosLauncher</AssemblyName>
     <RootNamespace>AdventurerLauncher</RootNamespace>
     <ApplicationIcon Condition="Exists('Assets\\launcher.ico')">Assets\launcher.ico</ApplicationIcon>
