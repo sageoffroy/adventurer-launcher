@@ -4,14 +4,14 @@
   "changelogUrl": "https://raw.githubusercontent.com/sageoffroy/adventurer-launcher/feature/launcher-v1/distribution/examples/changelog.json",
   "files": [
     {
-      "path": "Data/PATCH_PRINCIPAL_AQUI.MPQ",
-      "url": "https://github.com/sageoffroy/adventurer-launcher/releases/download/v0.1.0/PATCH_PRINCIPAL_AQUI.MPQ",
+      "path": "Data/patch-Z.mpq",
+      "url": "https://github.com/sageoffroy/adventurer-launcher/releases/download/v0.1.0/patch-Z.mpq",
       "sha256": "REEMPLAZAR_POR_SHA256_REAL",
       "size": 0
     },
     {
-      "path": "Data/esMX/PATCH_LOCALE_AQUI.MPQ",
-      "url": "https://github.com/sageoffroy/adventurer-launcher/releases/download/v0.1.0/PATCH_LOCALE_AQUI.MPQ",
+      "path": "Data/esMX/patch-esMX-z.mpq",
+      "url": "https://github.com/sageoffroy/adventurer-launcher/releases/download/v0.1.0/patch-esMX-z.mpq",
       "sha256": "REEMPLAZAR_POR_SHA256_REAL",
       "size": 0
     }
