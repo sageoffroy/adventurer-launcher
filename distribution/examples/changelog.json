@@ -1,0 +1,13 @@
+[
+  {
+    "version": "0.1.0",
+    "date": "2026-09-10",
+    "changes": [
+      "Primera versión del launcher.",
+      "Selección de carpeta de World of Warcraft 3.3.5a.",
+      "Actualización segura de los dos parches mediante SHA-256.",
+      "Paneles de Noticias y Changelog.",
+      "Botón Jugar."
+    ]
+  }
+]
