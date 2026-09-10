@@ -5,13 +5,15 @@
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <AssemblyName>AventurerosLauncher</AssemblyName>
     <RootNamespace>AdventurerLauncher</RootNamespace>
     <ApplicationIcon Condition="Exists('Assets\\launcher.ico')">Assets\launcher.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\launcher.ico" />
+    <Resource Include="Assets\launcher-logo.png" />
     <None Update="launcher-config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
