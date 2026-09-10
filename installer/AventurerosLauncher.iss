@@ -1,5 +1,7 @@
 #define MyAppName "Aventureros de Azeroth Launcher"
+#ifndef MyAppVersion
 #define MyAppVersion "0.1.0"
+#endif
 #define MyAppPublisher "Aventureros de Azeroth"
 #define MyAppExeName "AventurerosLauncher.exe"
 
@@ -18,6 +20,8 @@ WizardStyle=modern
 PrivilegesRequired=lowest
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
+CloseApplications=yes
+RestartApplications=no
 
 [Files]
 Source: "..\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -30,4 +34,5 @@ Name: "{autodesktop}\Aventureros de Azeroth"; Filename: "{app}\{#MyAppExeName}";
 Name: "desktopicon"; Description: "Crear acceso directo en el escritorio"; GroupDescription: "Accesos directos:"; Flags: unchecked
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "Abrir Aventureros de Azeroth"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\{#MyAppExeName}"; Description: "Abrir Aventureros de Azeroth"; Flags: nowait postinstall skipifsilent; Check: not WizardSilent
+Filename: "{app}\{#MyAppExeName}"; Flags: nowait; Check: WizardSilent
