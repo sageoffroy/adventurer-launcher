@@ -1,6 +1,6 @@
 #define MyAppName "Aventureros de Azeroth Launcher"
 #ifndef MyAppVersion
-#define MyAppVersion "0.1.0"
+#define MyAppVersion "0.2.0"
 #endif
 #define MyAppPublisher "Aventureros de Azeroth"
 #define MyAppExeName "AventurerosLauncher.exe"
@@ -14,6 +14,7 @@ DefaultDirName={autopf}\Aventureros de Azeroth
 DefaultGroupName=Aventureros de Azeroth
 OutputDir=output
 OutputBaseFilename=AventurerosLauncherSetup
+SetupIconFile=..\src\AdventurerLauncher\Assets\launcher.ico
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
