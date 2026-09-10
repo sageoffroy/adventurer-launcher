@@ -58,26 +58,28 @@ public sealed class UpdateService(HttpClient httpClient)
 
             var total = response.Content.Headers.ContentLength;
             await using var source = await response.Content.ReadAsStreamAsync(cancellationToken);
-            await using var destination = new FileStream(
-                tempPath,
-                FileMode.CreateNew,
-                FileAccess.Write,
-                FileShare.None,
-                1024 * 128,
-                useAsync: true);
 
-            var buffer = new byte[1024 * 128];
-            long copied = 0;
-            int read;
-            while ((read = await source.ReadAsync(buffer, cancellationToken)) > 0)
+            await using (var destination = new FileStream(
+                             tempPath,
+                             FileMode.CreateNew,
+                             FileAccess.Write,
+                             FileShare.None,
+                             1024 * 128,
+                             useAsync: true))
             {
-                await destination.WriteAsync(buffer.AsMemory(0, read), cancellationToken);
-                copied += read;
-                if (total is > 0)
-                    progress?.Report((double)copied / total.Value);
-            }
+                var buffer = new byte[1024 * 128];
+                long copied = 0;
+                int read;
+                while ((read = await source.ReadAsync(buffer, cancellationToken)) > 0)
+                {
+                    await destination.WriteAsync(buffer.AsMemory(0, read), cancellationToken);
+                    copied += read;
+                    if (total is > 0)
+                        progress?.Report((double)copied / total.Value);
+                }
 
-            await destination.FlushAsync(cancellationToken);
+                await destination.FlushAsync(cancellationToken);
+            }
 
             var downloadedHash = await ComputeSha256Async(tempPath, cancellationToken);
             if (!downloadedHash.Equals(file.Sha256, StringComparison.OrdinalIgnoreCase))
