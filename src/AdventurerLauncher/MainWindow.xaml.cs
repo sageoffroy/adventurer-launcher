@@ -18,6 +18,10 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        var version = typeof(MainWindow).Assembly.GetName().Version;
+        LauncherVersionText.Text = version is null
+            ? "Launcher"
+            : $"Launcher v{version.Major}.{version.Minor}.{version.Build}";
         Loaded += MainWindow_Loaded;
     }
 
