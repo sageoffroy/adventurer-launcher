@@ -34,3 +34,21 @@ jobs:
         with:
           name: AventurerosLauncher-win-x64
           path: publish/
+
+      - name: Install Inno Setup
+        run: choco install innosetup --no-progress -y
+
+      - name: Build Windows installer
+        shell: pwsh
+        run: |
+          $iscc = "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) {
+            throw "No se encontró ISCC.exe de Inno Setup."
+          }
+          & $iscc "installer\AventurerosLauncher.iss"
+
+      - name: Upload Windows installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: AventurerosLauncherSetup
+          path: installer/output/AventurerosLauncherSetup.exe
