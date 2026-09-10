@@ -5,7 +5,12 @@ on:
     branches:
       - main
       - feature/**
+    tags:
+      - 'launcher-v*'
   pull_request:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -14,6 +19,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Resolve launcher version
+        shell: pwsh
+        run: |
+          $version = "0.1.0"
+          if ($env:GITHUB_REF -like "refs/tags/launcher-v*") {
+            $version = $env:GITHUB_REF_NAME.Substring(10)
+          }
+          "LAUNCHER_VERSION=$version" >> $env:GITHUB_ENV
+          Write-Host "Launcher version: $version"
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -24,10 +39,10 @@ jobs:
         run: dotnet restore src/AdventurerLauncher/AdventurerLauncher.csproj
 
       - name: Build
-        run: dotnet build src/AdventurerLauncher/AdventurerLauncher.csproj --configuration Release --no-restore
+        run: dotnet build src/AdventurerLauncher/AdventurerLauncher.csproj --configuration Release --no-restore -p:Version=${{ env.LAUNCHER_VERSION }}
 
       - name: Publish self-contained Windows build
-        run: dotnet publish src/AdventurerLauncher/AdventurerLauncher.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=false --output publish
+        run: dotnet publish src/AdventurerLauncher/AdventurerLauncher.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=false -p:Version=${{ env.LAUNCHER_VERSION }} --output publish
 
       - name: Upload launcher artifact
         uses: actions/upload-artifact@v4
@@ -45,10 +60,42 @@ jobs:
           if (-not (Test-Path $iscc)) {
             throw "No se encontró ISCC.exe de Inno Setup."
           }
-          & $iscc "installer\AventurerosLauncher.iss"
+          & $iscc "/DMyAppVersion=$env:LAUNCHER_VERSION" "installer\AventurerosLauncher.iss"
 
       - name: Upload Windows installer
         uses: actions/upload-artifact@v4
         with:
           name: AventurerosLauncherSetup
           path: installer/output/AventurerosLauncherSetup.exe
+
+      - name: Publish launcher release
+        if: startsWith(github.ref, 'refs/tags/launcher-v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$env:GITHUB_REF_NAME" "installer/output/AventurerosLauncherSetup.exe" --title "Aventureros Launcher $env:LAUNCHER_VERSION" --generate-notes
+
+      - name: Publish self-update metadata
+        if: startsWith(github.ref, 'refs/tags/launcher-v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $installer = "installer/output/AventurerosLauncherSetup.exe"
+          $hash = (Get-FileHash $installer -Algorithm SHA256).Hash.ToLowerInvariant()
+          $url = "https://github.com/sageoffroy/adventurer-launcher/releases/download/$env:GITHUB_REF_NAME/AventurerosLauncherSetup.exe"
+          $metadata = @{
+            version = $env:LAUNCHER_VERSION
+            url = $url
+            sha256 = $hash
+          } | ConvertTo-Json
+          $encoded = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($metadata))
+          $current = gh api "repos/sageoffroy/adventurer-launcher/contents/distribution/launcher-version.json?ref=feature/launcher-v1" | ConvertFrom-Json
+          $body = @{
+            message = "release: publish launcher $env:LAUNCHER_VERSION metadata"
+            content = $encoded
+            sha = $current.sha
+            branch = "feature/launcher-v1"
+          } | ConvertTo-Json
+          $body | gh api --method PUT "repos/sageoffroy/adventurer-launcher/contents/distribution/launcher-version.json" --input -
