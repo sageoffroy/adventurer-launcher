@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text.Json;
@@ -8,6 +9,7 @@ namespace AdventurerLauncher.Services;
 public sealed class SelfUpdateService
 {
     private const string VersionUrl = "https://raw.githubusercontent.com/sageoffroy/adventurer-launcher/feature/launcher-v1/distribution/launcher-version.json";
+    private const int MaxAttempts = 3;
     private readonly HttpClient _httpClient;
 
     public SelfUpdateService(HttpClient httpClient)
@@ -17,74 +19,132 @@ public sealed class SelfUpdateService
 
     public async Task<bool> TryStartUpdateAsync(CancellationToken cancellationToken = default)
     {
-        LauncherVersionInfo? remote;
-        try
+        var localVersion = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0, 0);
+        Log($"Inicio de comprobación. Versión local: {localVersion}");
+
+        LauncherVersionInfo? remote = null;
+        Exception? metadataError = null;
+
+        for (var attempt = 1; attempt <= MaxAttempts; attempt++)
         {
-            using var response = await _httpClient.GetAsync(VersionUrl, cancellationToken);
-            response.EnsureSuccessStatusCode();
-            await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
-            remote = await JsonSerializer.DeserializeAsync<LauncherVersionInfo>(stream, new JsonSerializerOptions
+            try
             {
-                PropertyNameCaseInsensitive = true
-            }, cancellationToken);
+                var cacheBuster = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                using var request = new HttpRequestMessage(HttpMethod.Get, $"{VersionUrl}?t={cacheBuster}");
+                request.Headers.CacheControl = new CacheControlHeaderValue
+                {
+                    NoCache = true,
+                    NoStore = true
+                };
+
+                using var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                response.EnsureSuccessStatusCode();
+                await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+                remote = await JsonSerializer.DeserializeAsync<LauncherVersionInfo>(stream, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                }, cancellationToken);
+
+                metadataError = null;
+                break;
+            }
+            catch (Exception ex) when (!cancellationToken.IsCancellationRequested)
+            {
+                metadataError = ex;
+                Log($"Intento {attempt}/{MaxAttempts} al consultar versión falló: {ex.Message}");
+                if (attempt < MaxAttempts)
+                    await Task.Delay(TimeSpan.FromMilliseconds(500 * attempt), cancellationToken);
+            }
         }
-        catch
+
+        if (metadataError is not null || remote is null)
         {
-            // A launcher update check must never prevent the game launcher from opening.
+            Log("No se pudo obtener la versión remota. El launcher continuará normalmente.");
             return false;
         }
 
-        if (remote is null ||
-            !Version.TryParse(remote.Version, out var remoteVersion) ||
+        if (!Version.TryParse(remote.Version, out var remoteVersion) ||
             !Uri.TryCreate(remote.Url, UriKind.Absolute, out var installerUri) ||
             installerUri.Scheme is not ("http" or "https") ||
             string.IsNullOrWhiteSpace(remote.Sha256))
         {
+            Log($"Metadata de actualización inválida. Versión remota recibida: '{remote.Version}'.");
             return false;
         }
 
-        var localVersion = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0, 0);
+        Log($"Versión remota: {remoteVersion}");
+
         if (remoteVersion <= localVersion)
+        {
+            Log("No hay una actualización de launcher pendiente.");
             return false;
+        }
 
         var tempInstaller = Path.Combine(Path.GetTempPath(), $"AventurerosLauncherSetup-{remote.Version}.exe");
 
-        try
+        Exception? downloadError = null;
+        for (var attempt = 1; attempt <= MaxAttempts; attempt++)
         {
-            using (var response = await _httpClient.GetAsync(installerUri, HttpCompletionOption.ResponseHeadersRead, cancellationToken))
+            try
             {
+                Log($"Descargando launcher {remote.Version}. Intento {attempt}/{MaxAttempts}.");
+                using var response = await _httpClient.GetAsync(installerUri, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
                 response.EnsureSuccessStatusCode();
                 await using var source = await response.Content.ReadAsStreamAsync(cancellationToken);
                 await using var destination = new FileStream(tempInstaller, FileMode.Create, FileAccess.Write, FileShare.None);
                 await source.CopyToAsync(destination, cancellationToken);
-            }
 
+                downloadError = null;
+                break;
+            }
+            catch (Exception ex) when (!cancellationToken.IsCancellationRequested)
+            {
+                downloadError = ex;
+                Log($"Intento {attempt}/{MaxAttempts} de descarga falló: {ex.Message}");
+                TryDelete(tempInstaller);
+                if (attempt < MaxAttempts)
+                    await Task.Delay(TimeSpan.FromSeconds(attempt), cancellationToken);
+            }
+        }
+
+        if (downloadError is not null || !File.Exists(tempInstaller))
+        {
+            Log("No se pudo descargar el instalador. El launcher continuará normalmente.");
+            return false;
+        }
+
+        try
+        {
             var actualHash = await ComputeSha256Async(tempInstaller, cancellationToken);
             if (!actualHash.Equals(remote.Sha256.Trim(), StringComparison.OrdinalIgnoreCase))
             {
-                File.Delete(tempInstaller);
+                Log($"SHA256 inválido. Esperado: {remote.Sha256.Trim()}, obtenido: {actualHash}.");
+                TryDelete(tempInstaller);
                 return false;
             }
 
-            Process.Start(new ProcessStartInfo
+            Log($"SHA256 correcto. Ejecutando instalador {remote.Version}.");
+
+            var process = Process.Start(new ProcessStartInfo
             {
                 FileName = tempInstaller,
                 Arguments = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /CLOSEAPPLICATIONS",
                 UseShellExecute = true
             });
 
+            if (process is null)
+            {
+                Log("Windows no devolvió un proceso para el instalador.");
+                return false;
+            }
+
+            Log("Instalador iniciado correctamente. Cerrando launcher actual.");
             return true;
         }
-        catch
+        catch (Exception ex)
         {
-            try
-            {
-                if (File.Exists(tempInstaller))
-                    File.Delete(tempInstaller);
-            }
-            catch
-            {
-            }
+            Log($"No se pudo iniciar la actualización: {ex}");
+            TryDelete(tempInstaller);
             return false;
         }
     }
@@ -95,6 +155,35 @@ public sealed class SelfUpdateService
         using var sha = SHA256.Create();
         var hash = await sha.ComputeHashAsync(stream, cancellationToken);
         return Convert.ToHexString(hash).ToLowerInvariant();
+    }
+
+    private static void TryDelete(string path)
+    {
+        try
+        {
+            if (File.Exists(path))
+                File.Delete(path);
+        }
+        catch
+        {
+        }
+    }
+
+    private static void Log(string message)
+    {
+        try
+        {
+            var directory = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "AventurerosLauncher");
+            Directory.CreateDirectory(directory);
+
+            var logPath = Path.Combine(directory, "launcher-update.log");
+            File.AppendAllText(logPath, $"{DateTimeOffset.Now:yyyy-MM-dd HH:mm:ss zzz} | {message}{Environment.NewLine}");
+        }
+        catch
+        {
+        }
     }
 
     private sealed class LauncherVersionInfo
