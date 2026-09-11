@@ -23,7 +23,7 @@ jobs:
       - name: Resolve launcher version
         shell: pwsh
         run: |
-          $version = "0.2.3"
+          $version = "0.2.4"
           if ($env:GITHUB_REF -like "refs/tags/launcher-v*") {
             $version = $env:GITHUB_REF_NAME.Substring(10)
           }
