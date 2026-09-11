@@ -6,14 +6,14 @@
     {
       "path": "Data/patch-Z.mpq",
       "url": "https://github.com/sageoffroy/adventurer-launcher/releases/download/v0.1.2/patch-Z.mpq",
-      "sha256": "8fd3fe1fce074f75af5fd29b1a08103b802fcb4c7b5806b3b202fcdba1ae3ffa",
-      "size": 195149637
+      "sha256": "1ac6ce606813d59fec204a5990d4a7dfcde99ed1c000fd91456f08b24ad04999",
+      "size": 195162126
     },
     {
       "path": "Data/esMX/patch-esMX-z.mpq",
       "url": "https://github.com/sageoffroy/adventurer-launcher/releases/download/v0.1.2/patch-esMX-z.mpq",
-      "sha256": "17068c6a625c85323114a45d9cd132abfccf1d52260ba0f88519f13c51bb5d5d",
-      "size": 61264485
+      "sha256": "73221b7a004febb2e848bfc04e2d35b1bd333313ebbefb3ac590046d116b6c1c",
+      "size": 61277646
     }
   ]
 }
