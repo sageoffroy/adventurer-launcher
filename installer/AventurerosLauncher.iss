@@ -1,6 +1,6 @@
 #define MyAppName "Aventureros de Azeroth Launcher"
 #ifndef MyAppVersion
-#define MyAppVersion "0.2.3"
+#define MyAppVersion "0.2.4"
 #endif
 #define MyAppPublisher "Aventureros de Azeroth"
 #define MyAppExeName "AventurerosLauncher.exe"
