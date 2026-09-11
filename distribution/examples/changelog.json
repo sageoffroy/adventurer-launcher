@@ -1,61 +1,73 @@
 [
   {
-    "version": "0.9.1",
+    "version": "0.4.5",
     "date": "2026-09-10",
     "changes": [
       "Ahora las monturas se pueden usar dentro de las Dungeons."
     ]
   },
   {
-    "version": "0.9.0",
-    "date": "2026-09-09",
+    "version": "0.4.4.2",
+    "date": "2026-09-10",
     "changes": [
-      "Comenzó una revisión profunda de SpellDraft para independizar las habilidades del Aventurero de las clases originales.",
-      "Se comenzaron a clonar habilidades y cadenas de rangos para que funcionen correctamente con la clase Aventurero.",
-      "Los talentos que otorgan habilidades activas fueron separados del pool normal y reservados para futuros libros de hechizos.",
-      "Se conservaron y adaptaron scripts activos y cadenas de rangos de Pícaro para el nuevo sistema."
+      "Los talentos que otorgan habilidades activas fueron separados del pool normal de SpellDraft.",
+      "Estos talentos quedan reservados para futuros libros de hechizos."
     ]
   },
   {
-    "version": "0.8.6",
+    "version": "0.4.4.1",
+    "date": "2026-09-09",
+    "changes": [
+      "Se comenzaron a clonar habilidades y cadenas de rangos de Pícaro para que funcionen de forma nativa con Aventurero.",
+      "Se conservaron y adaptaron los scripts activos necesarios para estas habilidades."
+    ]
+  },
+  {
+    "version": "0.4.4",
+    "date": "2026-09-09",
+    "changes": [
+      "Comenzó una revisión profunda de SpellDraft para independizar las habilidades del Aventurero de las clases originales.",
+      "Las habilidades custom pasan a tener sus propias cadenas de rangos y compatibilidad con talentos."
+    ]
+  },
+  {
+    "version": "0.4.3",
     "date": "2026-09-08",
     "changes": [
       "Las resurrecciones dentro de las instancias vuelven a dejar al personaje completamente operativo.",
       "Liberar el espíritu ya no deja al personaje en un estado muerto inválido.",
-      "Si toda la compañía muere, la derrota de la expedición sigue siendo definitiva."
+      "Si toda la compañía muere, la derrota de la expedición continúa siendo definitiva."
     ]
   },
   {
-    "version": "0.8.5",
-    "date": "2026-09-08",
-    "changes": [
-      "Se corrigieron modelos visuales del equipo inicial del vendedor Remen.",
-      "Acero del contrabandista utiliza un nuevo modelo de espada de dos manos.",
-      "La ballesta inicial recibió un nuevo modelo visual."
-    ]
-  },
-  {
-    "version": "0.8.4",
-    "date": "2026-09-07",
-    "changes": [
-      "Se ajustó el balance de dificultad por tamaño de grupo.",
-      "Dos jugadores utilizan 75% de vida y 90% de daño como escala base.",
-      "Tres jugadores utilizan el valor de referencia completo.",
-      "Cuatro y cinco jugadores reciben escalado progresivo de vida y daño.",
-      "Raros y jefes conservan una dificultad superior al resto de los enemigos."
-    ]
-  },
-  {
-    "version": "0.8.3",
+    "version": "0.4.2",
     "date": "2026-09-07",
     "changes": [
       "Se incorporó la campaña temática La sombra sobre Ventormenta.",
-      "La campaña conecta varias instancias y culmina en el enfrentamiento con Onyxia.",
-      "El selector de aventuras incorpora una cuarta opción dedicada a misiones temáticas."
+      "La aventura conecta varias instancias y culmina en Onyxia.",
+      "El selector de aventuras incorpora una opción dedicada a misiones temáticas."
     ]
   },
   {
-    "version": "0.8.2",
+    "version": "0.4.1",
+    "date": "2026-09-07",
+    "changes": [
+      "El mago ofrece aventuras aleatorias de Classic, Outland y Rasganorte.",
+      "La dificultad de las instancias se adapta al tamaño de la compañía.",
+      "Se permite incorporar nuevos jugadores compatibles y recalcular la dificultad fuera de combate."
+    ]
+  },
+  {
+    "version": "0.4.0",
+    "date": "2026-09-06",
+    "changes": [
+      "Nacen las Compañías y el progreso persistente entre expediciones.",
+      "Una compañía puede continuar su avance a través de distintas Dungeons.",
+      "Las mazmorras pasan a formar parte central de la progresión de Aventureros de Azeroth."
+    ]
+  },
+  {
+    "version": "0.3.5",
     "date": "2026-09-07",
     "changes": [
       "Se redefinió el loot de jefes intermedios y finales.",
@@ -65,48 +77,43 @@
     ]
   },
   {
-    "version": "0.8.1",
-    "date": "2026-09-06",
-    "changes": [
-      "Se incorporó progreso persistente para las compañías de aventureros.",
-      "Una compañía puede continuar su avance entre distintas mazmorras.",
-      "Se permite sumar jugadores compatibles cuando la diferencia de nivel no supera el límite establecido.",
-      "Al incorporarse un nuevo miembro, la instancia puede reiniciarse y recalcular su dificultad fuera de combate."
-    ]
-  },
-  {
-    "version": "0.8.0",
-    "date": "2026-09-06",
-    "changes": [
-      "Las mazmorras pasan a formar parte central de la progresión de Aventureros de Azeroth.",
-      "El mago ofrece aventuras aleatorias de Classic, Outland y Rasganorte.",
-      "La dificultad se adapta al tamaño de la compañía.",
-      "Se comenzó a trabajar en progreso persistente entre expediciones."
-    ]
-  },
-  {
-    "version": "0.7.5",
+    "version": "0.3.4.2",
     "date": "2026-09-07",
     "changes": [
       "Se agregó el set Monje Errante.",
-      "Los sets manuales quedan separados de los objetos generados automáticamente por Gauntlet.",
-      "Los sets curados pasan a mantenerse del lado del servidor sin depender de un addon para sus tooltips."
+      "Los sets manuales quedan separados de los objetos generados automáticamente por Gauntlet."
     ]
   },
   {
-    "version": "0.7.4",
+    "version": "0.3.4.1",
     "date": "2026-09-07",
     "changes": [
       "Se recuperó y consolidó el set Cuero de Oso de 4 piezas.",
       "Cuero de Oso requiere nivel 3 y utiliza nivel de objeto 8.",
-      "Se corrigieron los nombres de set y los tooltips asociados a las piezas manuales."
+      "Se corrigieron sus nombres de set y tooltips."
     ]
   },
   {
-    "version": "0.7.3",
+    "version": "0.3.4",
+    "date": "2026-09-07",
+    "changes": [
+      "Se establece la convivencia entre sets curados manualmente y objetos generados por Gauntlet.",
+      "Los sets manuales pasan a mantenerse del lado del servidor sin depender de un addon para sus tooltips."
+    ]
+  },
+  {
+    "version": "0.3.3.1",
     "date": "2026-09-04",
     "changes": [
-      "Se ajustó el equipo inicial vendido por Remen.",
+      "Se ampliaron los consumibles del vendedor inicial.",
+      "Se agregaron Poción de sanación menor, Poción de maná menor, Chuletas de lince, Aceite de zahorí menor, Contrapeso burdo y Piedra de afilar burda."
+    ]
+  },
+  {
+    "version": "0.3.3",
+    "date": "2026-09-04",
+    "changes": [
+      "Se rebalanceó el equipo inicial vendido por Remen.",
       "Destripadora quedó en 5 DPS y recibió +2 de Agilidad.",
       "Acero del contrabandista quedó cerca de 6.8 DPS y recibió +1 de Fuerza.",
       "Rompehuesos recibió +1 de Constitución y +1 de Intelecto.",
@@ -114,112 +121,7 @@
     ]
   },
   {
-    "version": "0.7.2",
-    "date": "2026-09-04",
-    "changes": [
-      "Se ampliaron los consumibles del vendedor inicial.",
-      "Se agregaron Poción de sanación menor y Poción de maná menor.",
-      "Se agregaron Chuletas de lince y materiales de mejora de armas de bajo nivel.",
-      "Se incorporaron Aceite de zahorí menor, Contrapeso burdo y Piedra de afilar burda."
-    ]
-  },
-  {
-    "version": "0.7.1",
-    "date": "2026-09-04",
-    "changes": [
-      "La progresión de talentos comienza desde nivel 5 en lugar de nivel 10.",
-      "El Aventurero obtiene una elección de talento en cada nivel a partir de ese punto."
-    ]
-  },
-  {
-    "version": "0.7.0",
-    "date": "2026-09-04",
-    "changes": [
-      "SpellDraft amplía el pool de talentos puros de las clases originales.",
-      "Se incorporaron talentos pasivos de Guerrero, Pícaro, Paladín, Cazador, Sacerdote, Chamán, Druida, Mago y Brujo.",
-      "Se conservaron deliberadamente algunas opciones equivalentes para permitir distintas rutas de construcción del personaje."
-    ]
-  },
-  {
-    "version": "0.6.9",
-    "date": "2026-09-04",
-    "changes": [
-      "Se agregaron talentos puros de Brujo al pool de SpellDraft.",
-      "Abrazo demoníaco y Piel de arrabio se mantienen como elecciones válidas aunque compartan funciones con otros talentos defensivos."
-    ]
-  },
-  {
-    "version": "0.6.8",
-    "date": "2026-09-03",
-    "changes": [
-      "Se agregaron talentos puros de Mago al pool de SpellDraft."
-    ]
-  },
-  {
-    "version": "0.6.7",
-    "date": "2026-09-03",
-    "changes": [
-      "Se agregaron talentos puros de Druida al pool de SpellDraft.",
-      "Corazón de lo Salvaje conserva su mejora de Intelecto dentro del sistema."
-    ]
-  },
-  {
-    "version": "0.6.6",
-    "date": "2026-09-03",
-    "changes": [
-      "Se agregaron talentos puros de Chamán al pool de SpellDraft."
-    ]
-  },
-  {
-    "version": "0.6.5",
-    "date": "2026-09-03",
-    "changes": [
-      "Se agregaron talentos puros de Sacerdote al pool de SpellDraft.",
-      "Fortaleza mental conserva su mejora de Intelecto dentro del sistema."
-    ]
-  },
-  {
-    "version": "0.6.4",
-    "date": "2026-09-03",
-    "changes": [
-      "Se agregaron talentos puros de Cazador al pool de SpellDraft."
-    ]
-  },
-  {
-    "version": "0.6.3",
-    "date": "2026-09-03",
-    "changes": [
-      "Se agregaron talentos puros de Paladín al pool de SpellDraft."
-    ]
-  },
-  {
-    "version": "0.6.2",
-    "date": "2026-09-03",
-    "changes": [
-      "Se agregaron talentos puros de Pícaro al pool inicial de SpellDraft.",
-      "Se adaptó Especialización en doble empuñadura para el Aventurero."
-    ]
-  },
-  {
-    "version": "0.6.1",
-    "date": "2026-09-03",
-    "changes": [
-      "Se agregaron talentos puros de Guerrero al pool inicial de SpellDraft."
-    ]
-  },
-  {
-    "version": "0.6.0",
-    "date": "2026-09-03",
-    "changes": [
-      "SpellDraft comienza a utilizar hechizos creados específicamente para Aventurero.",
-      "Se incorporaron cadenas propias de rangos y un runtime dedicado para los nuevos hechizos.",
-      "Se agregaron generadores de puntos de combo personalizados y se vincularon con talentos de Pícaro.",
-      "Golpe Brutal fue adaptado como habilidad propia con requisito real de escudo.",
-      "Se estableció una clasificación de rarezas para el pool de habilidades."
-    ]
-  },
-  {
-    "version": "0.5.5",
+    "version": "0.3.2",
     "date": "2026-09-02",
     "changes": [
       "Se agregó un banco compartido de cuenta en la zona inicial de Villadorada.",
@@ -227,49 +129,40 @@
     ]
   },
   {
-    "version": "0.5.4",
+    "version": "0.3.1.3",
     "date": "2026-09-02",
     "changes": [
       "Se incorporaron drops auxiliares independientes para Gauntlet.",
-      "Las flechas quedan como munición auxiliar principal y su probabilidad se redujo al 1%.",
-      "Se incorporaron pociones como recompensas auxiliares de baja probabilidad."
+      "Flechas y pociones pasan a aparecer como recompensas auxiliares de baja probabilidad."
     ]
   },
   {
-    "version": "0.5.3",
+    "version": "0.3.1.2",
     "date": "2026-09-02",
     "changes": [
       "Se agregaron nuevas armas azules y épicas de bajo nivel con efectos al golpear.",
-      "El catálogo unificado aprendió a soportar correctamente objetos con procs de combate."
+      "El catálogo de recompensas aprendió a soportar correctamente objetos con procs de combate."
     ]
   },
   {
-    "version": "0.5.2",
+    "version": "0.3.1.1",
     "date": "2026-09-02",
     "changes": [
-      "Gauntlet ahora elige aleatoriamente entre todas las recompensas igualmente adecuadas para el jugador.",
-      "Los objetos fijos del Aventurero quedan fuera del pool generado de Gauntlet."
+      "Gauntlet ahora elige aleatoriamente entre recompensas igualmente adecuadas para el jugador.",
+      "Los objetos fijos del Aventurero quedan fuera del pool generado."
     ]
   },
   {
-    "version": "0.5.1",
+    "version": "0.3.1",
     "date": "2026-09-02",
     "changes": [
-      "Se creó un catálogo denso de recompensas de bajo nivel para Gauntlet.",
-      "El catálogo generado se integra tanto al servidor como al parche del cliente."
+      "Se creó un catálogo amplio de recompensas de bajo nivel para Gauntlet.",
+      "El catálogo generado se integra tanto al servidor como al parche del cliente.",
+      "Armas, armaduras y escudos pasan a formar parte de un pool unificado basado en nivel de objeto."
     ]
   },
   {
-    "version": "0.5.0",
-    "date": "2026-09-02",
-    "changes": [
-      "Gauntlet pasa a utilizar un único pool de recompensas basado en nivel de objeto.",
-      "La generación de armas, armaduras y escudos se unifica alrededor de un catálogo autoritativo.",
-      "El sistema comienza a generar automáticamente equipo adecuado para la progresión del Aventurero."
-    ]
-  },
-  {
-    "version": "0.4.0",
+    "version": "0.3.0",
     "date": "2026-08-31",
     "changes": [
       "Nace Gauntlet como sistema de recompensas y progresión de equipo.",
@@ -278,7 +171,93 @@
     ]
   },
   {
-    "version": "0.3.2",
+    "version": "0.2.7",
+    "date": "2026-09-04",
+    "changes": [
+      "La progresión de talentos comienza desde nivel 5 en lugar de nivel 10.",
+      "El Aventurero obtiene una elección de talento en cada nivel a partir de ese punto."
+    ]
+  },
+  {
+    "version": "0.2.6.9",
+    "date": "2026-09-04",
+    "changes": [
+      "Se agregaron talentos puros de Brujo al pool de SpellDraft.",
+      "Abrazo demoníaco y Piel de arrabio permanecen como elecciones válidas aunque compartan funciones con otros talentos defensivos."
+    ]
+  },
+  {
+    "version": "0.2.6.8",
+    "date": "2026-09-03",
+    "changes": [
+      "Se agregaron talentos puros de Mago al pool de SpellDraft."
+    ]
+  },
+  {
+    "version": "0.2.6.7",
+    "date": "2026-09-03",
+    "changes": [
+      "Se agregaron talentos puros de Druida al pool de SpellDraft.",
+      "Corazón de lo Salvaje conserva su mejora de Intelecto dentro del sistema."
+    ]
+  },
+  {
+    "version": "0.2.6.6",
+    "date": "2026-09-03",
+    "changes": [
+      "Se agregaron talentos puros de Chamán al pool de SpellDraft."
+    ]
+  },
+  {
+    "version": "0.2.6.5",
+    "date": "2026-09-03",
+    "changes": [
+      "Se agregaron talentos puros de Sacerdote al pool de SpellDraft.",
+      "Fortaleza mental conserva su mejora de Intelecto dentro del sistema."
+    ]
+  },
+  {
+    "version": "0.2.6.4",
+    "date": "2026-09-03",
+    "changes": [
+      "Se agregaron talentos puros de Cazador al pool de SpellDraft."
+    ]
+  },
+  {
+    "version": "0.2.6.3",
+    "date": "2026-09-03",
+    "changes": [
+      "Se agregaron talentos puros de Paladín al pool de SpellDraft."
+    ]
+  },
+  {
+    "version": "0.2.6.2",
+    "date": "2026-09-03",
+    "changes": [
+      "Se agregaron talentos puros de Pícaro al pool de SpellDraft.",
+      "Se adaptó Especialización en doble empuñadura para Aventurero."
+    ]
+  },
+  {
+    "version": "0.2.6.1",
+    "date": "2026-09-03",
+    "changes": [
+      "Se agregaron talentos puros de Guerrero al pool de SpellDraft."
+    ]
+  },
+  {
+    "version": "0.2.6",
+    "date": "2026-09-03",
+    "changes": [
+      "SpellDraft comienza a utilizar hechizos creados específicamente para Aventurero.",
+      "Se incorporaron cadenas propias de rangos y un runtime dedicado para los nuevos hechizos.",
+      "Se agregaron generadores de puntos de combo personalizados.",
+      "Golpe Brutal fue adaptado como habilidad propia con requisito real de escudo.",
+      "Se estableció una clasificación de rarezas para el pool de habilidades."
+    ]
+  },
+  {
+    "version": "0.2.2",
     "date": "2026-08-29",
     "changes": [
       "SpellDraft incorpora una interfaz propia dentro del cliente.",
@@ -286,20 +265,11 @@
     ]
   },
   {
-    "version": "0.3.1",
+    "version": "0.2.1",
     "date": "2026-08-28",
     "changes": [
       "Se amplió la compatibilidad entre habilidades de distintas clases y la clase Aventurero.",
-      "Se comenzaron a resolver restricciones de raza, clase, recursos y competencias heredadas del cliente original."
-    ]
-  },
-  {
-    "version": "0.3.0",
-    "date": "2026-08-27",
-    "changes": [
-      "SpellDraft se convierte en el sistema principal de construcción del personaje.",
-      "Los Aventureros desarrollan su identidad combinando habilidades y talentos de distintas clases.",
-      "Se establecen pools de habilidades, elecciones progresivas y reglas propias de adquisición."
+      "Se comenzaron a resolver restricciones heredadas de raza, clase, recursos y competencias."
     ]
   },
   {
@@ -308,11 +278,11 @@
     "changes": [
       "Nace SpellDraft.",
       "La progresión deja de depender exclusivamente de árboles tradicionales de talentos.",
-      "Se crea la base para recibir habilidades y talentos mediante elecciones durante el avance del personaje."
+      "Los Aventureros comienzan a construir su identidad combinando habilidades y talentos de distintas clases."
     ]
   },
   {
-    "version": "0.1.4",
+    "version": "0.1.3",
     "date": "2026-08-24",
     "changes": [
       "El Aventurero amplía su compatibilidad con distintos tipos de armas y armaduras.",
@@ -320,27 +290,19 @@
     ]
   },
   {
-    "version": "0.1.3",
+    "version": "0.1.2",
     "date": "2026-08-23",
     "changes": [
-      "Se construye el primer parche de cliente específico de Aventureros de Azeroth.",
-      "Los cambios de DBC comienzan a empaquetarse y distribuirse junto con el servidor."
-    ]
-  },
-  {
-    "version": "0.1.2",
-    "date": "2026-08-22",
-    "changes": [
-      "Se incorpora la primera identidad de talentos del Aventurero: Guardián.",
-      "Comienza la adaptación de talentos nativos de World of Warcraft a la nueva clase."
+      "Se incorporan las primeras bases de identidad y talentos propios para Aventurero.",
+      "Comienza la adaptación de talentos originalmente ligados a las clases nativas."
     ]
   },
   {
     "version": "0.1.1",
-    "date": "2026-08-21",
+    "date": "2026-08-22",
     "changes": [
-      "Se agrega infraestructura propia para datos del Aventurero en servidor y cliente.",
-      "Se incorporan migraciones de base de datos y herramientas para modificar DBC de forma reproducible."
+      "Se consolida el parche de cliente necesario para representar correctamente la clase Aventurero.",
+      "Se integran los primeros cambios DBC y soporte del runtime específico de la clase."
     ]
   },
   {
@@ -348,8 +310,8 @@
     "date": "2026-08-21",
     "changes": [
       "Nace Aventureros de Azeroth.",
-      "Se crea la clase jugable Aventurero.",
-      "Comienza el desarrollo de una progresión completamente custom sobre AzerothCore y World of Warcraft 3.3.5a."
+      "Se incorpora la clase custom Aventurero.",
+      "Se crea la base de servidor y cliente necesaria para desarrollar una progresión completamente propia."
     ]
   }
 ]
