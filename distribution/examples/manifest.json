@@ -1,19 +1,19 @@
 {
-  "version": "0.1.2",
+  "version": "0.4.4.3",
   "newsUrl": "https://raw.githubusercontent.com/sageoffroy/adventurer-launcher/feature/launcher-v1/distribution/examples/news.json",
   "changelogUrl": "https://raw.githubusercontent.com/sageoffroy/adventurer-launcher/feature/launcher-v1/distribution/examples/changelog.json",
   "files": [
     {
       "path": "Data/patch-Z.mpq",
-      "url": "https://github.com/sageoffroy/adventurer-launcher/releases/download/v0.1.2/patch-Z.mpq",
-      "sha256": "1ac6ce606813d59fec204a5990d4a7dfcde99ed1c000fd91456f08b24ad04999",
-      "size": 195162126
+      "url": "https://github.com/sageoffroy/adventurer-launcher/releases/download/v0.4.4.3/patch-Z.mpq",
+      "sha256": "abc3c700a2d09c465fb4e847063d218b0365ae8016379ea7f5299c5aa5a0e70a",
+      "size": 195172998
     },
     {
       "path": "Data/esMX/patch-esMX-z.mpq",
-      "url": "https://github.com/sageoffroy/adventurer-launcher/releases/download/v0.1.2/patch-esMX-z.mpq",
-      "sha256": "73221b7a004febb2e848bfc04e2d35b1bd333313ebbefb3ac590046d116b6c1c",
-      "size": 61277646
+      "url": "https://github.com/sageoffroy/adventurer-launcher/releases/download/v0.4.4.3/patch-esMX-z.mpq",
+      "sha256": "23253a3a0e822a443d1ac2e547db340f704f45fbd839a576edda42e4b3b7bf5d",
+      "size": 61288518
     }
   ]
 }
